@@ -1,0 +1,72 @@
+.mat-form-field.ngx-search-field {
+  max-width: 500px;
+  min-width: 200px;
+}
+
+.mat-button.ngx-search-button {
+  padding: 2px;
+  min-width: 0px;
+}
+
+.mat-button.ngx-search-extended-button {
+  padding: 0px 0px 0px 0px;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+.ngx-search-elementgroup {
+  margin: 0px;
+  padding: 1px;
+  border: solid;
+  border-color: lightblue;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.mat-icon.ngx-search-icon-p75x {
+  transform: scale(0.75);
+}
+
+.ngx-search-semi-transparent {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.ngx-search-element-text-10pt {
+  font-size: 10pt !important;
+}
+
+/* small form field - currently for components placed on button ribbon - works with appearance = "outline" for input and select*/
+.mat-form-field.ngx-search-small-input[appearance="outline"] .mat-form-field-flex {
+  align-items: center;
+  padding-right: 0.1em;
+}
+.mat-form-field.ngx-search-small-input[appearance="outline"] .mat-form-field-infix {
+  padding: 0.6em 0 0.75em 0;
+  font-size: 9pt;
+}
+.mat-form-field.ngx-search-small-input[appearance="outline"]
+  .mat-form-field-infix
+  .mat-select-arrow {
+  margin-top: 6px;
+}
+.mat-form-field.ngx-search-small-input:not(.mat-form-field-should-float)[appearance="outline"]
+  .mat-form-field-label.mat-form-field-empty {
+  top: 1.5em;
+}
+.mat-form-field.ngx-search-small-input[appearance="outline"] .mat-form-field-wrapper {
+  padding-bottom: 0em;
+}
+.mat-form-field.ngx-search-small-input[appearance="outline"] .mat-form-field-suffix {
+  top: 0.12em;
+}
+
+/* these make a button basically inert - no indication of focus or hover*/
+.mat-button.ngx-search-inactive-button .mat-button-focus-overlay {
+  background-color: transparent;
+}
+
+.mat-button.ngx-search-inactive-button .mat-menu-item:hover {
+  background-color: transparent;
+}

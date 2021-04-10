@@ -1,0 +1,68 @@
+<!--main search box-->
+<form [formGroup]="searchForm" autocomplete="off" fxLayout="row" fxLayoutAlign="center center">
+  <mat-form-field class="ngx-search-field ngx-search-small-input" appearance="outline"
+    [style.width.px]="searchComponentWidth">
+    <mat-label>{{placeholder | localizeTerms:searchTerms}}</mat-label>
+    <input #input matInput type="text" formControlName="search">
+    <button mat-button matSuffix class="ngx-search-button"
+      [attr.aria-label]="'SEARCH_PLACEHOLDER' | localizeTerms:searchTerms"
+      [matTooltip]="'SEARCH_PLACEHOLDER' | localizeTerms:searchTerms" [disabled]="searchDisabled"
+      (click)="search(input.value)" (mousedown)="mouseDown($event)" fxLayoutAlign="center center">
+      <mat-icon svgIcon="search"></mat-icon>
+      <mat-icon *ngIf="false" svgIcon="plus" class="ngx-search-icon-p75x"></mat-icon>
+    </button>
+  </mat-form-field>
+
+  <!--button as trigger for extended search options popover-->
+  <button mat-button [disableRipple]="true" class="ngx-search-extended-button ngx-search-inactive-button"
+    [mdePopoverTriggerFor]="searchPopover" mdePopoverTriggerOn="hover" popoverTrigger="mdePopoverTrigger"
+    [mdePopoverCloseOnClick]="false" [mdePopoverEnterDelay]="searchExtendedPopupDelay" (closed)="extendedSearchClose()">
+    <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="plus" class="ngx-search-icon-p75x"
+      [style.vertical-align]="'top'"></mat-icon>
+  </button>
+</form>
+
+<!--popover for search to provide extended options-->
+<mde-popover #searchPopover="mdePopover" [mdePopoverOverlapTrigger]="false" mdePopoverPositionY="below"
+  mdePopoverPositionX="before" [mdePopoverOffsetY]="0" [mdePopoverOffsetX]="-8">
+  <div class="ngx-search-elementgroup ngx-search-semi-transparent" fxLayout="column" fxLayoutGap="10px">
+    <mat-card style="max-width: 2000px">
+      <mat-card-content>
+        <form [formGroup]="extendedSearchForm" fxLayout="column" fxLayoutGap="15px" autocomplete="off">
+          <!--startsWith checkbox-->
+          <mat-checkbox class="ngx-search-element-text-10pt" formControlName="startsWith"
+            matTooltip="{{'SEARCH_STARTS_WITH_TOOLTIP' | localizeTerms:searchTerms }}">
+            {{'SEARCH_STARTS_WITH' | localizeTerms:searchTerms }}
+          </mat-checkbox>
+          <!--case sensitive checkbox-->
+          <mat-checkbox class="ngx-search-element-text-10pt" formControlName="caseSensitive"
+            matTooltip="{{'SEARCH_CASE_SENSITIVE_TOOLTIP' | localizeTerms:searchTerms }}">
+            {{'SEARCH_CASE_SENSITIVE' | localizeTerms:searchTerms}}
+          </mat-checkbox>
+          <!--from-to-->
+          <fieldset class="ngx-search-elementgroup" [style.padding.px]="5" fxLayout="row" fxLayoutGap="10px">
+            <legend class="ngx-search-element-text-10pt">{{'SEARCH_RANGE' | localizeTerms:searchTerms }}</legend>
+
+            <!--search from-->
+            <mat-form-field class="ngx-search-element-text-10pt" [style.width.px]="'220'">
+              <mat-label>{{'SEARCH_FROM' | localizeTerms:searchTerms}}</mat-label>
+              <input matInput type="text" formControlName="searchFrom" maxlength="100"
+                placeholder="{{'SEARCH_FROM' | localizeTerms:searchTerms }}" autofocus />
+              <mat-hint align="start">{{'SEARCH_RANGE_LOWER' | localizeTerms:searchTerms}}
+              </mat-hint>
+            </mat-form-field>
+
+            <!--search to-->
+            <mat-form-field class="ngx-search-element-text-10pt" [style.width.px]="'220'">
+              <mat-label>{{'SEARCH_TO' | localizeTerms:searchTerms }}</mat-label>
+              <input matInput type="text" formControlName="searchTo" maxlength="100"
+                placeholder="{{'SEARCH_TO' | localizeTerms:searchTerms }}" />
+              <mat-hint align="start">{{'SEARCH_RANGE_UPPER' | localizeTerms:searchTerms}}
+              </mat-hint>
+            </mat-form-field>
+          </fieldset>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mde-popover>
