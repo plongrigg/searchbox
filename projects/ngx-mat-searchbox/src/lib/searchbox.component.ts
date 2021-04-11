@@ -5,10 +5,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { plusImage, searchImage } from './searchbox.images';
 import { ExtendedSearchChanges, SearchData, SearchResult, SearchTerms } from './searchbox.model';
-import { enableControls, isNumber, isNumeric, strip } from './searchbox.utils';
+import { enableControls } from './searchbox.utils';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SearchboxService } from './searchbox.service';
 
+/**
+ * Searchbox component, sized to fit a toolbar, to which a set of search data is provided, and which can then
+ * perform a search on the provided data and emit a result to a parent component.
+ */
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ngx-mat-searchbox',
