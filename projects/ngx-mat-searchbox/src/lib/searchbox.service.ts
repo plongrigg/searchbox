@@ -3,14 +3,31 @@ import { SearchResult } from './searchbox.model';
 import { isNumber, isNumeric, strip } from './searchbox.utils';
 
 /**
+ * Abstract class to be extended if custom search logic needs to be implemented, or the
+ * SearchboxDefaultService can be extended
+ */
+export abstract class SearchboxService {
+   abstract search(
+    search: string,
+    allResults: SearchResult[],
+    lastFoundResult: SearchResult | undefined,
+    searchMultiple: boolean,
+    searchNextRow: boolean,
+    searchCaseSensitive: boolean,
+    searchStartsWith: boolean,
+    searchRange: boolean,
+    searchFrom: string,
+    searchTo: string,
+    searchExcludeChars: string[]
+  ): SearchResult[];
+}
+
+
+/**
  * Default search service
  */
-@Injectable({
-  providedIn: 'root'
-})
-export class SearchboxService {
-  constructor() { }
-
+@Injectable()
+export class SearchboxDefaultService extends SearchboxService {
   public search(
     search: string,
     allResults: SearchResult[],
