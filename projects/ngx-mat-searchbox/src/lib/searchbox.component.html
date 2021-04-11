@@ -8,8 +8,7 @@
       [attr.aria-label]="'SEARCH_PLACEHOLDER' | localizeTerms:searchTerms"
       [matTooltip]="'SEARCH_PLACEHOLDER' | localizeTerms:searchTerms" [disabled]="searchDisabled"
       (click)="search(input.value)" (mousedown)="mouseDown($event)" fxLayoutAlign="center center">
-      <mat-icon svgIcon="search"></mat-icon>
-      <mat-icon *ngIf="false" svgIcon="plus" class="ngx-search-icon-p75x"></mat-icon>
+      <mat-icon svgIcon="ngx-search"></mat-icon>
     </button>
   </mat-form-field>
 
@@ -17,7 +16,7 @@
   <button mat-button [disableRipple]="true" class="ngx-search-extended-button ngx-search-inactive-button"
     [mdePopoverTriggerFor]="searchPopover" mdePopoverTriggerOn="hover" popoverTrigger="mdePopoverTrigger"
     [mdePopoverCloseOnClick]="false" [mdePopoverEnterDelay]="searchExtendedPopupDelay" (closed)="extendedSearchClose()">
-    <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="plus" class="ngx-search-icon-p75x"
+    <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="ngx-search-plus" class="ngx-search-icon-p75x"
       [style.vertical-align]="'top'"></mat-icon>
   </button>
 </form>

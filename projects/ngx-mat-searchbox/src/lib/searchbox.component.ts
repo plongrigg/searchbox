@@ -7,6 +7,7 @@ import { plusImage, searchImage } from './searchbox.images';
 import { ExtendedSearchChanges, SearchData, SearchResult, SearchTerms } from './searchbox.model';
 import { enableControls, isNumber, isNumeric, strip } from './searchbox.utils';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { SearchboxService } from './searchbox.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -18,26 +19,25 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   /**
-   * Data source for search
+   * Full search dataset, in format suitable for reporting search results
    */
-  private searchDataSource: SearchData = [];
-
   private allResults: SearchResult[] = [];
 
+  /**
+   * Supplies search dataset to component
+   */
   @Input()
-  public get searchData(): SearchData { return this.searchDataSource; }
-  public set searchData(searchDataSource: SearchData) {
-    this.searchDataSource = searchDataSource;
+  public set searchData(data: SearchData) {
 
     // flatten [][] into SearchResult[]
-    this.allResults = searchDataSource
+    this.allResults = data
       .map((row, rowIndex) => row.map((cell, columnIndex) => ({ rowIndex, columnIndex, value: cell ?? '' }))).flat(1);
 
     // determine if the last found result is the same in the new data set
     // else if it has changed then initialize last found, so any new search start from beginning
     if (this.lastFoundResult) {
-      const newCellValue = this.searchCellValue(this.lastFoundResult.rowIndex, this.lastFoundResult.columnIndex);
-      if (newCellValue !== this.lastFoundResult.value) { this.lastFoundResult = undefined; }
+      const newCellValue = this.searchCellValue(data, this.lastFoundResult.rowIndex, this.lastFoundResult.columnIndex);
+      if (!newCellValue || newCellValue !== this.lastFoundResult.value) { this.lastFoundResult = undefined; }
     }
   }
 
@@ -174,9 +174,10 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
 
   constructor(
     private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer) {
-    this.loadImage('search', searchImage);
-    this.loadImage('plus', plusImage);
+    private sanitizer: DomSanitizer,
+    private searchService: SearchboxService) {
+    this.loadImage('ngx-search', searchImage);
+    this.loadImage('ngx-search-plus', plusImage);
   }
 
   ngOnInit(): void {
@@ -290,98 +291,23 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
    * Performs a search
    */
   public search(search: string): void {
-    if (!search.trim() && !this.searchRange) {
-      this.searchResults.emit([]);
-      return;
-    }
+    const searchResults = this.searchService.search(search, this.allResults, this.lastFoundResult, this.searchMultiple, this.searchNextRow,
+      this.searchCaseSensitive, this.searchStartsWith, this.searchRange, this.searchFrom, this.searchTo, this.searchExcludeChars);
 
-    // if last found then split array in two and reassemble, so we search from next element
-    let unfiltered: SearchResult[] = [...this.allResults];
-    if (this.lastFoundResult && !this.searchMultiple && unfiltered.length > 0) {
-      const foundRowIndex = this.lastFoundResult?.rowIndex ?? -1;
-      const foundColumnIndex = this.lastFoundResult?.columnIndex ?? -1;
-      const arrayIndex = this.searchNextRow ?
-        unfiltered.map(searchResult => searchResult.rowIndex).lastIndexOf(foundRowIndex) :
-        unfiltered.findIndex(searchResult => searchResult.rowIndex === foundRowIndex && searchResult.columnIndex === foundColumnIndex);
-      if (arrayIndex >= 0) {
-        const lag = unfiltered.slice(0, arrayIndex + 1);
-        const lead = unfiltered.slice(arrayIndex + 1);
-        unfiltered = [...lead, ...lag];
-      }
-    }
-
-    // filter
-    let filtered: SearchResult[] = [];
     if (this.searchMultiple) {
       this.lastFoundResult = undefined;
-      filtered = unfiltered.filter(result => this.filter(result, search));
     } else {
-      this.lastFoundResult = unfiltered.find(result => this.filter(result, search));
-      filtered = this.lastFoundResult ? [this.lastFoundResult] : [];
+      this.lastFoundResult = searchResults[0];
     }
-
-    // emit results
-    this.searchResults.emit(filtered);
+    this.searchResults.emit(searchResults);
   }
 
-  private filter(result: SearchResult, search: string): boolean {
-    // extract numeric
-    const nvalue = isNumber(result.value) ? result.value as number : undefined;
-    let svalue = isNumber(result.value) ? (result.value as number).toString() : result.value as string;
-    if (!svalue) { return false; }
-    svalue = !this.searchCaseSensitive ? svalue.toLowerCase() : svalue;
-    const sfrom = !this.searchCaseSensitive ? this.searchFrom.toLowerCase() : this.searchFrom;
-    const sto = !this.searchCaseSensitive ? this.searchTo.toLowerCase() : this.searchTo;
-
-    // transform case of search string if can insensitive
-    const ssearch = !this.searchCaseSensitive ? search.toLowerCase() : search;
-
-    // get numeric value of search
-    const nsearch = isNumeric(ssearch) ? Number(ssearch) : undefined;
-
-    // numeric range
-    if (this.searchRange && isNumeric(this.searchFrom) && isNumeric(this.searchTo) && nvalue) {
-      return this.numericRange(nvalue, Number(this.searchFrom), Number(this.searchTo));
-    }
-
-    // numeric equals
-    if (!this.searchRange && nvalue && nsearch) { return this.numericEquals(nvalue, nsearch); }
-
-    // string range
-    if (this.searchRange) { return this.stringRange(svalue, sfrom, sto); }
-
-    // string starts with
-    if (!this.searchRange && this.searchStartsWith) { return this.stringStartsWith(svalue, ssearch); }
-
-    // string contains
-    if (!this.searchRange && !this.searchStartsWith) { return this.stringContains(svalue, ssearch); }
-
-    return false;
-  }
-
-  private numericRange(cellvalue: number, lower: number, upper: number): boolean {
-    return cellvalue >= lower && cellvalue <= upper;
-  }
-
-  private numericEquals(cellvalue: number, search: number): boolean { return cellvalue === search; }
-
-  private stringRange(cellvalue: string, lower: string, upper: string): boolean {
-    const scellvalue = strip(cellvalue, this.searchExcludeChars);
-    return (scellvalue.localeCompare(lower) >= 0) &&
-      (scellvalue.localeCompare(upper) <= 0);
-  }
-
-  private stringStartsWith(cellvalue: string, search: string): boolean {
-    return strip(cellvalue, this.searchExcludeChars).startsWith(search);
-  }
-
-  private stringContains(cellvalue: string, search: string): boolean {
-    return strip(cellvalue, this.searchExcludeChars).includes(search);
-  }
-
-  private searchCellValue(rowIndex: number, columnIndex: number): string | number | undefined {
-    if (rowIndex < 0 || rowIndex >= this.searchData.length) { return undefined; }
-    const cells = this.searchData[rowIndex];
+  /**
+   * Find cell value in search dataset based on row and column indexes
+   */
+  private searchCellValue(data: SearchData, rowIndex: number, columnIndex: number): string | number | undefined {
+    if (rowIndex < 0 || rowIndex >= data.length) { return undefined; }
+    const cells = data[rowIndex];
     if (columnIndex < 0 || columnIndex >= cells.length) { return undefined; }
     return cells[columnIndex];
   }
@@ -396,8 +322,6 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   public get placeholder(): keyof SearchTerms {
     return this.searchRange ? 'SEARCH_RANGE_PLACEHOLDER' : 'SEARCH_PLACEHOLDER';
   }
-
-
 
   public clearSearchField(): void {
     this.searchForm.get('search')?.setValue('', { emitEvent: false });
