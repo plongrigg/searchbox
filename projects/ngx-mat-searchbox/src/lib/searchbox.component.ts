@@ -94,7 +94,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   @Input() public searchMultiple = false;
 
   /**
-   * When searching from next match, skip other matched entries in cells on same row
+   * When searching for next match, skip other matched entries in cells on same row
    */
   @Input() public searchNextRow = true;
 
@@ -114,7 +114,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   @Input() public searchCaseSensitive = false;
 
   /**
-   * Determine if search string is to be idendified only at the start of the searched value,
+   * Determine if search string is to be identified only at the start of the searched value,
    * otherwise it can occur anywhere in the value
    */
   @Input() public searchStartsWith = false;
@@ -132,7 +132,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
 
   /**
    * Panel to enter extended search params open on hovering over
-   * extended (+) button.  This determines how long the dealy is in milliseconds
+   * extended (+) button.  This determines how long the delay is in milliseconds
    * before the panel appears
    */
   @Input() public searchExtendedPopupDelay = 200;

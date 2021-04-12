@@ -1,5 +1,5 @@
 {
-  "name": "ngx-mat-searchbox",
+  "name": "@fgrid-ngx/mat-searchbox",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/animations": ">=10.0.0",
