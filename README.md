@@ -65,8 +65,12 @@ As well as the usual Angular packages that are automatically installed, please e
  - @angular/material 
  - @angular/cdk
 
-In addition the following packages will be automatically installed if not already available.
- - @material-extended/mde
+Install the @material-extended/mde package as follows
+```sh
+npm install @material-extended/mde --force
+```
+
+In addition the following package(s) will be automatically installed if not already available.
  - @angular/flex-layout 
 
 ### Installation
