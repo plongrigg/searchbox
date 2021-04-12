@@ -13,6 +13,8 @@
      <br />
     <a href="https://github.com/plongrigg/searchbox-demo">Demo code</a>
     ·
+    <a href="https://stackblitz.com/edit/searchbox-demo">Stackblitz demo</a>
+    ·
     <a href="https://github.com/plongrigg/searchbox/issues">Report Bug</a>
     ·
     <a href="https://github.com/plongrigg/searchbox/issues">Request Feature</a>
