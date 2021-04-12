@@ -28,7 +28,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "deploy": "ng build --prod && cd dist/ngx-mat-searchbox && npm pack && cd ../../../searchbox-demo && npm install ../searchbox/dist/ngx-mat-searchbox/ngx-mat-searchbox-1.0.0.tgz && ng serve --open=true && cd ../searchbox",
+    "deploy": "ng build --prod && cd dist/ngx-mat-searchbox && npm pack && cd ../../../searchbox-demo && npm install ../searchbox/dist/ngx-mat-searchbox/fgrid-ngx-mat-searchbox-1.0.0.tgz && ng serve --open=true && cd ../searchbox",
     "test": "ng test",
     "lint": "ng lint"
   },

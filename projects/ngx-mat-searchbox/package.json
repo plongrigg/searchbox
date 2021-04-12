@@ -1,6 +1,29 @@
 {
   "name": "@fgrid-ngx/mat-searchbox",
+  "description": "Searchbox component extending Angular Material",
   "version": "1.0.0",
+  "author": {
+    "name": "Peter C. Longrigg",
+    "email": "plongrigg@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plongrigg/searchbox"
+  },
+  "bugs": {
+    "url": "https://github.com/plongrigg/searchbox/issues"
+  },
+  "keywords": [
+    "angular",
+    "angular searchbox",
+    "angular material searchbox",
+    "searchbox",
+    "searchbox component",
+    "toolbat searchbox",
+    "search component",
+    "search"
+  ],
   "peerDependencies": {
     "@angular/animations": ">=10.0.0",
     "@angular/cdk": ">=10.0.0",
