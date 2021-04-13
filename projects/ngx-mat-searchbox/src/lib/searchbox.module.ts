@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MdePopoverModule } from '@material-extended/mde';
+import { MdePopoverModule } from '@fgrid-ngx/mde';
 import { NgxMatSearchboxTermsPipe } from './searchbox-terms.pipe';
 import { NgxMatSearchboxComponent } from './searchbox.component';
 import { SearchboxDefaultService, SearchboxService } from './searchbox.service';

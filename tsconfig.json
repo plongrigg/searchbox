@@ -12,8 +12,8 @@
     "declaration": false,
     "downlevelIteration": true,
     "paths": {
-      "ngx-mat-searchbox": [
-        "dist/ngx-mat-searchbox/ngx-mat-searchbox",
+      "@fgrid-ngx/mat-searchbox": [
+        "dist/ngx-mat-searchbox/fgrid-ngx-mat-searchbox",
         "dist/ngx-mat-searchbox"
       ]
     },

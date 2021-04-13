@@ -67,13 +67,9 @@ As well as the usual Angular packages that are automatically installed, please e
  - @angular/material 
  - @angular/cdk
 
-Install the @material-extended/mde package as follows
-```sh
-npm install @material-extended/mde --force
-```
-
 In addition the following package(s) will be automatically installed if not already available.
  - @angular/flex-layout 
+ - @fgrid-ngx/mde
 
 ### Installation
 1. Install NPM package
@@ -94,7 +90,7 @@ In addition the following package(s) will be automatically installed if not alre
 	import  {  NgModule  }  from  '@angular/core';
 	import  {  BrowserModule  }  from  '@angular/platform-browser';
 	import  {  BrowserAnimationsModule  }  from  '@angular/platform-browser/animations';
-	import  {  NgxMatSearchboxModule  }  from  'ngx-mat-searchbox';
+	import  {  NgxMatSearchboxModule  }  from  '@fgrid-ngx/mat-searchbox';
 	import  {  AppComponent  }  from  './app.component';
 	  
 	@NgModule({

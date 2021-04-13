@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-mat-searchbox": {
+    "@fgrid-ngx/mat-searchbox": {
       "projectType": "library",
       "root": "projects/ngx-mat-searchbox",
       "sourceRoot": "projects/ngx-mat-searchbox/src",
