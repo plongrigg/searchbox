@@ -146,6 +146,8 @@ searchExcludeChars | [ ] | Strip these characters out of the target values prior
 searchExtended | true | Determines if options for extended search are available i.e. startsWith, caseSensitive and range. |
 searchExtendedPopupDelay | 200 | Panel to enter extended search params opens on hovering over extended (+) button. This determines how long the delay is in milliseconds prior to the panel appearing.  
 &nbsp;  
+&nbsp;  
+
 |@Output|Description  |
 |--|--|
 |searchResults  | Emits results of each search against supplied data set, using search string and other extended search parameters if applicable.  The results are in an array of objects of type SearchResult   |
