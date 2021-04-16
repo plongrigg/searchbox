@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { plusImage, searchImage } from './searchbox.images';
-import { ExtendedSearchChanges, SearchData, SearchResult, SearchTerms, standardTerms } from './searchbox.model';
+import { ExtendedSearchChanges, SearchData, SearchResult, SearchTerms } from './searchbox.model';
 import { enableControls } from './searchbox.utils';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SearchboxService } from './searchbox.service';
@@ -53,12 +53,12 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   /**
    * Localization
    */
-  private terms = standardTerms();
+  private terms = this.searchService.standardTerms();
 
   @Input()
   public get searchTerms(): SearchTerms { return this.terms; }
   public set searchTerms(searchTerms: SearchTerms) {
-    this.terms = { ...standardTerms(), ...searchTerms };
+    this.terms = { ...this.searchService.standardTerms(), ...searchTerms };
   }
 
   /**

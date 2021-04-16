@@ -39,19 +39,3 @@ export type SearchTerms = {
   SEARCH_RANGE_UPPER?: string;
   SEARCH_RANGE?: string;
 };
-
-export const standardTerms = (): SearchTerms => {
-  return {
-    SEARCH_PLACEHOLDER: 'Search',
-    SEARCH_RANGE_PLACEHOLDER: 'Range',
-    SEARCH_STARTS_WITH: 'Search starts with',
-    SEARCH_STARTS_WITH_TOOLTIP: 'Determine if the searched element starts with the search term',
-    SEARCH_CASE_SENSITIVE: 'Search is case sensitive',
-    SEARCH_CASE_SENSITIVE_TOOLTIP: 'Determine if the search is case sensitive',
-    SEARCH_FROM: 'From',
-    SEARCH_TO: 'To',
-    SEARCH_RANGE_LOWER: 'Lower bound of search range',
-    SEARCH_RANGE_UPPER: 'Upper bound of search range',
-    SEARCH_RANGE: 'Search Range'
-  };
-};

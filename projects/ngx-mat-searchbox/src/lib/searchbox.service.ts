@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchResult } from './searchbox.model';
+import { SearchResult, SearchTerms } from './searchbox.model';
 import { isNumber, isNumeric, strip } from './searchbox.utils';
 
 /**
@@ -20,8 +20,26 @@ export abstract class SearchboxService {
     searchTo: string,
     searchExcludeChars: string[]
   ): SearchResult[];
-}
 
+  /**
+   * Provide list of standard terms
+   */
+  public standardTerms(): SearchTerms {
+    return {
+      SEARCH_PLACEHOLDER: 'Search',
+      SEARCH_RANGE_PLACEHOLDER: 'Range',
+      SEARCH_STARTS_WITH: 'Search starts with',
+      SEARCH_STARTS_WITH_TOOLTIP: 'Determine if the searched element starts with the search term',
+      SEARCH_CASE_SENSITIVE: 'Search is case sensitive',
+      SEARCH_CASE_SENSITIVE_TOOLTIP: 'Determine if the search is case sensitive',
+      SEARCH_FROM: 'From',
+      SEARCH_TO: 'To',
+      SEARCH_RANGE_LOWER: 'Lower bound of search range',
+      SEARCH_RANGE_UPPER: 'Upper bound of search range',
+      SEARCH_RANGE: 'Search Range'
+    };
+  }
+}
 
 /**
  * Default search service
