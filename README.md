@@ -13,9 +13,11 @@
     <br />
     <a href="https://github.com/plongrigg/searchbox-demo">Demo code</a>
     ·
-   <a  href="https://stackblitz.com/edit/searchbox-demo">Stackblitz demo</a>
-   ·
-   <a href="https://github.com/plongrigg/searchbox/issues">Report Bug</a>
+    <a  href="https://searchbox-demo.stackblitz.io/">Demo</a>
+    ·
+    <a  href="https://stackblitz.com/edit/searchbox-demo">Stackblitz demo (with code)</a>
+    ·
+    <a href="https://github.com/plongrigg/searchbox/issues">Report Bug</a>
     ·
     <a href="https://github.com/plongrigg/searchbox/issues">Request Feature</a>
   </p>
@@ -107,11 +109,14 @@ In addition the following package(s) will be automatically installed if not alre
 
 	If the module is being imported into the AppModule, or another core module which is imported once, use the forRoot() method. If being imported into a lazy-loaded module, the forChild() method can be used instead.
 
- 2. Supplying custom search logic.
-If the the forRoot() or forChild() methods are used to install the module without parameters, default search logic is installed.  In order to customize the search logic, extend either the abstract class SearchboxService, overriding the search(...) method, or extend the SearchboxDefaultService.  Ensure that the extended class has the @Injectable decorator. The custom class can be installed through either the forRoot() or forChild() methods as follows (where SearchboxCustomService is the overriding @Injectable class).
+ 2. Supplying custom search logic. If the the forRoot() or forChild() methods are used to install the module without parameters, default search logic is installed.  In order to customize the search logic, extend either the abstract class SearchboxService, overriding the search(...) method, or extend the SearchboxDefaultService.  Ensure that the extended class has the @Injectable decorator. The custom class can be installed through either the forRoot() or forChild() methods as follows (where SearchboxCustomService is the overriding @Injectable class).
     ```javascript
     NgxMatSearchboxModule.forRoot(
-    { searchService: { provide: SearchboxService, useClass: SearchboxCustomService }})
+    { searchService: { 
+          provide: SearchboxService, 
+          useClass: SearchboxCustomService 
+         }
+    })
     ```
 
  3. To include the component in a template, use the ngx-mat-searchbox tag. 
@@ -121,7 +126,7 @@ If the the forRoot() or forChild() methods are used to install the module withou
        (searchResults)="usersSearched($event)">
      </ngx-mat-searchbox>
      ```
-     At a minimum, supply an input for the data to be searched, and a function to respond to the results of the search.  There are a number of other inputs that can be used to control the behavior and appearance of the component.  The search data supplied is in the form of a SearchData type.  This is simply an array of rows, each row consisting of an array of cells, with each cell being a number or a string.    Please refer to the exported definition of this type.   The (searchResults) output function passes a SearchResult array in its parameter, which can then be used to perform whatever action is required.  
+     At a minimum (unless providing a custom search service that does not rely on supplied data), supply an input for the data to be searched, and a function to respond to the results of the search.  There are a number of other inputs that can be used to control the behavior and appearance of the component.  The search data supplied is in the form of a SearchData type.  This is simply an array of rows, each row consisting of an array of cells, with each cell being a number or a string.    Please refer to the exported definition of this type.   The (searchResults) output function passes a SearchResult array in its parameter, which can then be used to perform whatever action is required.  
  
 ## API 
 
@@ -139,8 +144,8 @@ searchCaseSensitive | false | Determines if searches are case sensitive by defau
 searchStartsWith | false | Determines if search string is to be identified only at the start of the searched value, otherwise it can occur anywhere in the value. |
 searchExcludeChars | [ ] | Strip these characters out of the target values prior to comparing to search string. |
 searchExtended | true | Determines if options for extended search are available i.e. startsWith, caseSensitive and range. |
-searchExtendedPopupDelay | 200 | Panel to enter extended search params opens on hovering over extended (+) button. This determines how long the delay is in milliseconds prior to the panel appearing. 
-
+searchExtendedPopupDelay | 200 | Panel to enter extended search params opens on hovering over extended (+) button. This determines how long the delay is in milliseconds prior to the panel appearing.  
+&nbsp;  
 |@Output|Description  |
 |--|--|
 |searchResults  | Emits results of each search against supplied data set, using search string and other extended search parameters if applicable.  The results are in an array of objects of type SearchResult   |
@@ -157,4 +162,3 @@ Peter C. Longrigg: [plongrigg@gmail.com](mailto:plongrigg@gmail.com)
 
 Project Link: [https://github.com/plongrigg/searchbox](https://github.com/plongrigg/searchbox)
 
-Project Demo Link (code): [https://github.com/plongrigg/searchbox-demo](https://github.com/plongrigg/searchbox-demo)

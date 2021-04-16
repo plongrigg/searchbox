@@ -53,12 +53,12 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   /**
    * Localization
    */
-  private terms = standardTerms;
+  private terms = standardTerms();
 
   @Input()
   public get searchTerms(): SearchTerms { return this.terms; }
   public set searchTerms(searchTerms: SearchTerms) {
-    this.terms = { ...standardTerms, ...searchTerms };
+    this.terms = { ...standardTerms(), ...searchTerms };
   }
 
   /**
