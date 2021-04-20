@@ -131,7 +131,7 @@ In addition the following package(s) will be automatically installed if not alre
 |@Input  |Default value(s)	 | Description  
 |--|--|--|
 searchFieldAppearance | outline | material appearance - outline, fill, legacy or standard |
-searchFieldSize | small | small reduces font size to 9pt and corresponding padding, margins etc to size for a toolbar, default uses the material default sizing |
+searchFieldSize | small | small or default - small reduces font size to 9pt and corresponding padding, margins etc to size for a toolbar, default uses the material default sizing |
 searchData| [ ]  | SearchData type, supplying the datasource for the search.  This can be dynamically changed e.g. by connecting the input to an Observable.|
 searchTerms| object with key/values representing standard terms  | Can be used to localize / translate the terms used in the UI. This is an object with key value pairs.  Valid keys are SEARCH_PLACEHOLDER, SEARCH_RANGE_PLACEHOLDER, SEARCH_STARTS_WITH, SEARCH_STARTS_WITH_TOOLTIP, SEARCH_CASE_SENSITIVE, SEARCH_CASE_SENSITIVE_TOOLTIP, SEARCH_FROM, SEARCH_TO, SEARCH_RANGE_LOWER, SEARCH_RANGE_UPPER, SEARCH_RANGE. So for example if you wished to override the search placeholder the supplied object would be as follows {SEARCH_PLACEHOLDER, 'your term'}.  The object may contain as many valid key / value pairs as required to be translated / localized.  
 searchDisabled | false | Determines if the component is in a disabled state. |
