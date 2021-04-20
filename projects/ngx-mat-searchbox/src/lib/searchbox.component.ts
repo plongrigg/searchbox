@@ -48,7 +48,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   /**
    * Determines if search happens on each key stroke or only when search button is clicked (or on enter key stoke)
    */
-  @Input() private searchContinuous = true;
+  @Input() public searchContinuous = true;
 
   /**
    * Localization
@@ -122,6 +122,17 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
    * before the panel appears
    */
   @Input() public searchExtendedPopupDelay = 200;
+
+  /**
+   * Applies angular material apperance to the field
+   */
+   @Input() public searchFieldAppearance: 'outline' | 'standard' | 'fill' | 'legacy' = 'outline';
+
+   /**
+    * If 'small' then the field has a font of 9pt and the margins, padding etc. are reduced so that
+    * the field can comfortably fit on a toolbar.
+    */
+   @Input() public searchFieldSize: 'small' | 'default' = 'small';
 
   /**
    * Range rather than a single search value

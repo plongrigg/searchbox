@@ -1,7 +1,7 @@
 <!--main search box-->
 <form [formGroup]="searchForm" autocomplete="off" fxLayout="row" fxLayoutAlign="center center">
-  <mat-form-field class="ngx-search-field ngx-search-small-input" appearance="outline"
-    [style.width.px]="searchComponentWidth">
+  <mat-form-field [ngClass]="{'ngx-search-field': true, 'ngx-search-small-input': searchFieldSize==='small'}"
+    [appearance]="searchFieldAppearance" [style.width.px]="searchComponentWidth">
     <mat-label>{{placeholder | localizeTerms:searchTerms}}</mat-label>
     <input #input matInput type="text" formControlName="search">
     <button mat-button matSuffix class="ngx-search-button"
