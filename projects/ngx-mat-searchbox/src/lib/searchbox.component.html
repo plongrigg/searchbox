@@ -1,5 +1,5 @@
 <!--main search box-->
-<form [formGroup]="searchForm" autocomplete="off" fxLayout="row" fxLayoutAlign="center center">
+<form [formGroup]="searchForm" autocomplete="off" fxLayout="row" fxLayoutAlign="center start">
   <mat-form-field [ngClass]="{'ngx-search-field': true, 'ngx-search-small-input': searchFieldSize==='small'}"
     [appearance]="searchFieldAppearance" [style.width.px]="searchComponentWidth">
     <mat-label>{{placeholder | localizeTerms:searchTerms}}</mat-label>
@@ -16,8 +16,8 @@
   <button mat-button [disableRipple]="true" class="ngx-search-extended-button ngx-search-inactive-button"
     [mdePopoverTriggerFor]="searchPopover" mdePopoverTriggerOn="hover" popoverTrigger="mdePopoverTrigger"
     [mdePopoverCloseOnClick]="false" [mdePopoverEnterDelay]="searchExtendedPopupDelay" (closed)="extendedSearchClose()">
-    <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="ngx-search-plus" class="ngx-search-icon-p75x"
-      [style.vertical-align]="'top'"></mat-icon>
+    <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="ngx-search-plus"
+      [ngClass]="{'ngx-search-icon-p75x':searchFieldSize==='small'}" [style.vertical-align]="'top'"></mat-icon>
   </button>
 </form>
 
