@@ -9,9 +9,31 @@ export type SearchRow = SearchCell[];
 export type SearchData = SearchRow[];
 
 /**
- * Result of a successful seach
+ * Parameters used to effect a search
  */
-export type SearchResult = { rowIndex: number, columnIndex: number, value: number | string };
+export type SearchParams = {
+  search: string;
+  searchMultiple: boolean;
+  searchNextRow: boolean;
+  searchCaseSensitive: boolean;
+  searchStartsWith: boolean;
+  searchRange: boolean;
+  searchFrom: string;
+  searchTo: string;
+  searchExcludeChars: string[];
+};
+
+/**
+ * Result of a successful search match
+ */
+export type SearchResult = { rowIndex: number, columnIndex: number, value: number | string, searchRow?: SearchRow};
+
+/**
+ * Array of search results + searchParams
+ */
+export interface SearchResults extends Array<SearchResult> {
+  searchParams?: SearchParams;
+}
 
 /**
  * Extended search options form changes

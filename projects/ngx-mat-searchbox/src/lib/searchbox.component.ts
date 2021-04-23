@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { plusImage, searchImage } from './searchbox.images';
-import { ExtendedSearchChanges, SearchData, SearchResult, SearchTerms } from './searchbox.model';
+import { ExtendedSearchChanges, SearchData, SearchParams, SearchResult, SearchResults, SearchTerms } from './searchbox.model';
 import { enableControls } from './searchbox.utils';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SearchboxService } from './searchbox.service';
@@ -35,7 +35,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
 
     // flatten [][] into SearchResult[]
     this.allResults = data
-      .map((row, rowIndex) => row.map((cell, columnIndex) => ({ rowIndex, columnIndex, value: cell ?? '' }))).flat(1);
+      .map((row, rowIndex) => row.map((cell, columnIndex) => ({ rowIndex, columnIndex, value: cell ?? '', searchRow: row }))).flat(1);
 
     // determine if the last found result is the same in the new data set
     // else if it has changed then initialize last found, so any new search start from beginning
@@ -126,13 +126,13 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   /**
    * Applies angular material apperance to the field
    */
-   @Input() public searchFieldAppearance: 'outline' | 'standard' | 'fill' | 'legacy' = 'outline';
+  @Input() public searchFieldAppearance: 'outline' | 'standard' | 'fill' | 'legacy' = 'outline';
 
-   /**
-    * If 'small' then the field has a font of 9pt and the margins, padding etc. are reduced so that
-    * the field can comfortably fit on a toolbar.
-    */
-   @Input() public searchFieldSize: 'small' | 'default' = 'small';
+  /**
+   * If 'small' then the field has a font of 9pt and the margins, padding etc. are reduced so that
+   * the field can comfortably fit on a toolbar.
+   */
+  @Input() public searchFieldSize: 'small' | 'default' = 'small';
 
   /**
    * Range rather than a single search value
@@ -146,7 +146,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   /**
    * Output result of search
    */
-  @Output() public searchResults: EventEmitter<SearchResult[]> = new EventEmitter();
+  @Output() public searchResults: EventEmitter<SearchResults> = new EventEmitter();
 
   /**
    * Form containing search input field
@@ -203,7 +203,9 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
 
         this.lastFoundResult = undefined;
         if (!search.trim() && !this.searchRange) {
-          this.searchResults.emit([]);
+          const searchResults: SearchResults = [];
+          searchResults.searchParams = this.searchParams(search);
+          this.searchResults.emit(searchResults);
           return;
         }
 
@@ -292,8 +294,12 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
    * Performs a search
    */
   public search(search: string): void {
-    const searchResults = this.searchService.search(search, this.allResults, this.lastFoundResult, this.searchMultiple, this.searchNextRow,
-      this.searchCaseSensitive, this.searchStartsWith, this.searchRange, this.searchFrom, this.searchTo, this.searchExcludeChars);
+    const searchResults: SearchResults =
+      this.searchService.search(search, this.allResults, this.lastFoundResult, this.searchMultiple, this.searchNextRow,
+        this.searchCaseSensitive, this.searchStartsWith, this.searchRange, this.searchFrom, this.searchTo, this.searchExcludeChars);
+
+    // add search params to array
+    searchResults.searchParams = this.searchParams(search);
 
     if (this.searchMultiple) {
       this.lastFoundResult = undefined;
@@ -311,6 +317,17 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
     const cells = data[rowIndex];
     if (columnIndex < 0 || columnIndex >= cells.length) { return undefined; }
     return cells[columnIndex];
+  }
+
+  /**
+   * Create SearchParams object from search string and current parameter values (set by default or extended dialog)
+   */
+  private searchParams(search: string): SearchParams {
+    return {
+      search, searchMultiple: this.searchMultiple, searchNextRow: this.searchNextRow,
+      searchCaseSensitive: this.searchCaseSensitive, searchStartsWith: this.searchStartsWith, searchRange: this.searchRange,
+      searchFrom: this.searchFrom, searchTo: this.searchTo, searchExcludeChars: this.searchExcludeChars
+    };
   }
 
   /**
