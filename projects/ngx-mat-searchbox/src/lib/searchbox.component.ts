@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -18,10 +18,17 @@ import { SearchboxService } from './searchbox.service';
   selector: 'ngx-mat-searchbox',
   templateUrl: './searchbox.component.html',
   styleUrls: ['./searchbox.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => NgxMatSearchboxComponent),
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
+export class NgxMatSearchboxComponent implements OnInit, OnDestroy, ControlValueAccessor {
   /**
    * Full search dataset, in format suitable for reporting search results
    */
@@ -173,6 +180,11 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
    */
   private extendedSearchChanged$: Subscription | undefined;
 
+  /**
+   * Track if component has been touched, i.e if a search string has been entered
+   */
+  private touched = false;
+
   constructor(
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
@@ -283,7 +295,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Respond to each keystoke in the seach box
+   * Respond to each keystoke in the search box
    */
   private continuousSearch(search: string): void {
     if (!this.searchContinuous) { return; }
@@ -307,6 +319,9 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
       this.lastFoundResult = searchResults[0];
     }
     this.searchResults.emit(searchResults);
+
+    // ControlValueAccessor
+    this.onChange(searchResults);
   }
 
   /**
@@ -343,6 +358,37 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy {
 
   public clearSearchField(): void {
     this.searchForm.get('search')?.setValue('', { emitEvent: false });
+  }
+
+  /** ControlValueAccessor implementation */
+  private onChange = (searchResults: SearchResults) => { };
+
+  private onTouched = () => { };
+
+  public writeValue(search: string | undefined): void {
+    this.searchForm.get('search')?.setValue(search ?? '', { emitEvent: true });
+  }
+
+  public registerOnChange(fn: (searchResults: SearchResults) => void): void {
+    this.onChange = (searchResults: SearchResults) => {
+      fn(searchResults);
+      this.markAsTouched();
+    };
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  public setDisabledState(disabled: boolean): void {
+    this.searchDisabled = disabled;
+  }
+
+  private markAsTouched(): void {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
   }
 
   public ngOnDestroy(): void {

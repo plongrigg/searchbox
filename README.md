@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/plongrigg/searchbox">
     <img src="https://raw.githubusercontent.com/plongrigg/readme-images/main/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -107,7 +107,7 @@ In addition the following package(s) will be automatically installed if not alre
 
 	If the module is being imported into the AppModule, or another core module which is imported once, use the forRoot() method. If being imported into a lazy-loaded module, the forChild() method can be used instead.
 
- 2. Supplying custom search logic. If the the forRoot() or forChild() methods are used to install the module without parameters, default search logic is installed.  In order to customize the search logic, extend either the abstract class SearchboxService, overriding the search(...) method, or extend the SearchboxDefaultService.  Ensure that the extended class has the @Injectable decorator. The custom class can be installed through either the forRoot() or forChild() methods as follows (where SearchboxCustomService is the overriding @Injectable class).
+ 2. Supplying custom search logic. If the the forRoot() or forChild() methods are used to install the module without parameters, default search logic is installed.  In order to customize the search logic, extend either the abstract class SearchboxService, overriding the search(...) method, or extend the SearchboxDefaultService. Ensure that the extended class has the @Injectable decorator. The custom class can be installed through either the forRoot() or forChild() methods as follows (where SearchboxCustomService is the overriding @Injectable class).
     ```javascript
     NgxMatSearchboxModule.forRoot(
     { searchService: { 
@@ -124,7 +124,7 @@ In addition the following package(s) will be automatically installed if not alre
        (searchResults)="usersSearched($event)">
      </ngx-mat-searchbox>
      ```
-     At a minimum (unless providing a custom search service that does not rely on supplied data), supply an input for the data to be searched, and a function to respond to the results of the search.  There are a number of other inputs that can be used to control the behavior and appearance of the component.  The search data supplied is in the form of a SearchData type.  This is simply an array of rows, each row consisting of an array of cells, with each cell being a number or a string.    Please refer to the exported definition of this type.   The (searchResults) output function passes a SearchResult array in its parameter, which can then be used to perform whatever action is required.  
+     There are a number of inputs that can be used to control the behavior and appearance of the component (see API below). At a minimum (unless providing a custom search service that does not rely on supplied data), supply an input for the data to be searched. If not defined as a control in an Angular form, also supply a function to respond to the results of the search.  The search data supplied is in the form of a SearchData type.  This is simply an array of rows, each row consisting of an array of cells, with each cell being a number or a string.    Please refer to the exported definition of this type. The (searchResults) output function passes a SearchResult array in its parameter, which can then be used to perform whatever action is required.  This component also implements the ControlValueAccessor interface which means it can be defined as a control in an Angular template or reactive form, and the usual mechanisms to set a search string or respond to the search results can be used.  
  
 ## API 
 
