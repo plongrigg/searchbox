@@ -1,7 +1,7 @@
 {
   "name": "@fgrid-ngx/mat-searchbox",
   "description": "Searchbox component extending Angular Material",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "author": {
     "name": "Peter C. Longrigg",
     "email": "plongrigg@gmail.com"
@@ -22,7 +22,16 @@
     "searchbox component",
     "toolbar searchbox",
     "search component",
-    "search"
+    "search",
+    "mat search",
+    "mat searchbox",
+    "angular extended select",
+    "angular material multi-line select",
+    "angular material searchable select",
+    "mat select",
+    "mat select filter",
+    "mat select search",
+    "mat select searchable"
   ],
   "scripts": {
     "ng": "ng",

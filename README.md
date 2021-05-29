@@ -5,7 +5,7 @@
     <img src="https://raw.githubusercontent.com/plongrigg/readme-images/main/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Angular Material Searchbox</h3>
+  <h3 align="center">Searchbox component for Angular Material</h3>
 
   <p align="center">
     Searchbox suitable for inclusion on a toolbar, based on Angular Material
