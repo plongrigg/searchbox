@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "tslib": "^2.0.0",
-    "@angular/flex-layout": "*",
     "@fgrid-ngx/mde": ">= 3.0.3"
   }
 }

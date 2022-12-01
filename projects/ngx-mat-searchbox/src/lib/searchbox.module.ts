@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,7 +19,6 @@ import { SearchboxDefaultService, SearchboxService } from './searchbox.service';
 export type SearchboxConfig = {
   searchService?: Provider  // e.g. { provide: SearchboxService, useClass: SearchboxCustomService }
 };
-
 @NgModule({
   declarations: [
     NgxMatSearchboxComponent,
@@ -28,7 +26,6 @@ export type SearchboxConfig = {
   ],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     MdePopoverModule,

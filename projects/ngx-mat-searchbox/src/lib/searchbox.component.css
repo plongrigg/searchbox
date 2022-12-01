@@ -1,3 +1,189 @@
+/**layouts**/
+.ngx-formlayout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  box-sizing: border-box;
+}
+
+.ngx-columnlayout {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ngx-rowlayout {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.ngx-colgap15px {
+  column-gap: 15px;
+}
+
+.ngx-colgap10px {
+  column-gap: 10px;
+}
+
+.ngx-rowgap10px {
+  row-gap: 10px;
+}
+
+.ngx-rowgap15px {
+  row-gap: 15px;
+}
+
+
+/***dialog***/
+.ngx-search-elementgroup {
+  margin: 0px;
+  padding: 1px;
+  border: solid;
+  border-color: lightblue;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.ngx-search-semi-transparent {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.ngx-search-element-text-10pt {
+  font-size: 10pt;
+}
+
+.ngx-search-element-text-8pt {
+  font-size: 8pt;
+}
+
+/***styling for Angular Material 15+****/
+.ngx-search-field.mat-mdc-form-field {
+  max-width: 500px;
+  min-width: 200px;
+}
+
+.ngx-search-small-input.mat-mdc-form-field
+  .ngx-search-button.mat-mdc-button {
+  padding: 0px 2px 0px 0px;
+  min-width: 0px;
+}
+
+.ngx-search-small-input.mat-mdc-form-field.mat-form-field-appearance-outline
+  .ngx-search-button.mat-mdc-button {
+  height: 34px;
+}
+
+.ngx-search-small-input.mat-mdc-form-field:not(.mat-form-field-appearance-outline)
+  .ngx-search-button.mat-mdc-button {
+  height: 48px;
+}
+
+.mat-mdc-form-field:not(.ngx-search-small-input)
+  .ngx-search-button.mat-mdc-button {
+  padding: 0px 12px 0px 0px;
+  min-width: 0px;
+  height: 56px;
+}
+
+.mat-mdc-form-field .ngx-search-button.mat-mdc-button > .mat-icon {
+  transform: scale(1);
+  width: 24px;
+  height: 24px;
+  margin-right: 0px;
+}
+
+.mat-mdc-form-field + .ngx-search-extended-button.mat-mdc-button {
+  padding: 0px 0px 0px 2px;
+  min-width: 0px;
+  min-height: 0px;
+  align-items: unset;
+  --mat-mdc-button-persistent-ripple-color: unset;
+}
+
+.mat-mdc-form-field.ngx-search-small-input
+  + .ngx-search-extended-button.mat-mdc-button
+  > .mat-icon {
+  transform: scale(1);
+  font-size: unset;
+}
+
+.mat-mdc-form-field:not(.ngx-search-small-input)
+  + .ngx-search-extended-button.mat-mdc-button
+  > .mat-icon {
+  transform: scale(1.3);
+  font-size: unset;
+}
+
+/* small form field - currently for components placed on button ribbon */
+.ngx-search-small-input.mat-mdc-form-field .mat-mdc-form-field-flex {
+  align-items: center;
+  padding-right: 0.1em;
+}
+.ngx-search-small-input.mat-mdc-form-field:not(.mat-form-field-appearance-outline)
+  .mat-mdc-form-field-flex {
+  padding-top: 0em;
+}
+.ngx-search-small-input.mat-mdc-form-field:not(.mat-form-field-appearance-outline)
+  .mat-mdc-form-field-wrapper
+  .mat-mdc-form-field-underline {
+  bottom: 0em;
+}
+.ngx-search-small-input.mat-mdc-form-field .mat-mdc-form-field-infix {
+  padding: 0px 0px 0px 0px;
+  font-size: 9pt;
+  min-height: 24px;
+}
+.ngx-search-small-input.mat-mdc-form-field
+  .mat-mdc-form-field-infix
+  .mat-mdc-select-arrow {
+  margin-top: 6px;
+}
+.ngx-search-small-input.mat-mdc-form-field:not(.mat-mdc-form-field-should-float)
+  .mat-mdc-form-field-label.mat-mdc-form-field-empty {
+  top: 1.5em;
+}
+.ngx-search-small-input.mat-mdc-form-field .mat-mdc-form-field-wrapper {
+  padding-bottom: 0em;
+}
+.ngx-search-small-input.mat-mdc-form-field .mat-mdc-form-field-suffix {
+  top: 0.12em;
+}
+
+.ngx-search-small-input.mat-mdc-form-field
+  .mat-mdc-form-field-subscript-wrapper {
+  max-height: 0px;
+}
+
+.ngx-search-small-input.mat-mdc-form-field
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-floating-label:not(.mdc-floating-label--float-above) {
+  top: 50%;
+}
+
+/**only for non-outline**/
+.ngx-search-small-input.mat-mdc-form-field:not(.mat-form-field-appearance-outline)
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-floating-label.mdc-floating-label--float-above {
+  top: 10px;
+}
+
+/* these make a button basically inert - no indication of focus or hover*/
+.mat-mdc-button.ngx-search-inactive-button .mat-mdc-button-focus-overlay {
+  background-color: transparent;
+}
+
+.mat-mdc-button.ngx-search-inactive-button .mat-mdc-menu-item:hover {
+  background-color: transparent;
+}
+
+
+/***styling for Angular Material 14 and lower****/
 .mat-form-field.ngx-search-field {
   max-width: 500px;
   min-width: 200px;
@@ -14,27 +200,8 @@
   min-height: 0px;
 }
 
-.ngx-search-elementgroup {
-  margin: 0px;
-  padding: 1px;
-  border: solid;
-  border-color: lightblue;
-  border-radius: 5px;
-  border-width: 1px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
 .mat-icon.ngx-search-icon-p75x {
   transform: scale(0.75);
-}
-
-.ngx-search-semi-transparent {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.ngx-search-element-text-10pt {
-  font-size: 10pt !important;
 }
 
 /* small form field - currently for components placed on button ribbon */
@@ -42,10 +209,13 @@
   align-items: center;
   padding-right: 0.1em;
 }
-.ngx-search-small-input.mat-form-field:not([appearance="outline"]) .mat-form-field-flex {
+.ngx-search-small-input.mat-form-field:not([appearance="outline"])
+  .mat-form-field-flex {
   padding-top: 0em;
 }
-.ngx-search-small-input.mat-form-field:not([appearance="outline"]) .mat-form-field-wrapper .mat-form-field-underline {
+.ngx-search-small-input.mat-form-field:not([appearance="outline"])
+  .mat-form-field-wrapper
+  .mat-form-field-underline {
   bottom: 0em;
 }
 .ngx-search-small-input.mat-form-field .mat-form-field-infix {
@@ -55,7 +225,8 @@
 .ngx-search-small-input.mat-form-field .mat-form-field-infix .mat-select-arrow {
   margin-top: 6px;
 }
-.ngx-search-small-input.mat-form-field:not(.mat-form-field-should-float) .mat-form-field-label.mat-form-field-empty {
+.ngx-search-small-input.mat-form-field:not(.mat-form-field-should-float)
+  .mat-form-field-label.mat-form-field-empty {
   top: 1.5em;
 }
 .ngx-search-small-input.mat-form-field .mat-form-field-wrapper {
@@ -65,7 +236,6 @@
   top: 0.12em;
 }
 
-
 /* these make a button basically inert - no indication of focus or hover*/
 .mat-button.ngx-search-inactive-button .mat-button-focus-overlay {
   background-color: transparent;
@@ -74,3 +244,5 @@
 .mat-button.ngx-search-inactive-button .mat-menu-item:hover {
   background-color: transparent;
 }
+
+

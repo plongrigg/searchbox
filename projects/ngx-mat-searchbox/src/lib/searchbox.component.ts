@@ -205,6 +205,7 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy, ControlValue
 
     // form for search field
     this.searchForm.addControl('search', searchField);
+    enableControls(this.searchForm, !this.disabled);
 
     // respond to changes in the search field
     this.searchTextChanged$ = searchField.valueChanges
@@ -253,16 +254,16 @@ export class NgxMatSearchboxComponent implements OnInit, OnDestroy, ControlValue
         this.searchFrom = changes.searchFrom ?? '';
         this.searchTo = changes.searchTo ?? '';
 
-        // clear and disable from-to if startwith is on
-        enableControls(searchFrom, !this.searchStartsWith);
-        enableControls(searchTo, !this.searchStartsWith);
-
-        // if startwith then clear out from-to
+        // if startswith then clear out from-to
         if (this.searchStartsWith) {
           searchFrom.setValue('', { emitEvent: false });
           searchTo.setValue('', { emitEvent: false });
           this.searchRange = false;
         }
+
+        // disable from-to if startswith is on, else enable
+        enableControls(searchFrom, !this.searchStartsWith);
+        enableControls(searchTo, !this.searchStartsWith);
 
         // determine if a range
         if (!this.searchStartsWith && this.searchFrom.trim().length && this.searchTo.trim().length) {
