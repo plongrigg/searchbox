@@ -4,7 +4,6 @@
   "dest": "../../dist/ngx-mat-searchbox",
   "assets": [],
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds" : {"@fgrid-ngx/mde":"@fgrid-ngx/mde"}
+    "entryFile": "src/public-api.ts"
   }
 }

@@ -31,18 +31,6 @@
             "tsConfig": "projects/ngx-mat-searchbox/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-mat-searchbox/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-mat-searchbox/tsconfig.lib.json",
-              "projects/ngx-mat-searchbox/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
