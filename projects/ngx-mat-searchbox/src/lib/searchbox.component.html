@@ -13,7 +13,7 @@
   </mat-form-field>
 
   <!--button as trigger for extended search options popover-->
-  <button mat-button [disableRipple]="true" class="ngx-search-extended-button ngx-search-inactive-button"
+  <button #trigger mat-button [disableRipple]="true" class="ngx-search-extended-button ngx-search-inactive-button"
     [mdePopoverTriggerFor]="searchPopover" mdePopoverTriggerOn="hover" popoverTrigger="mdePopoverTrigger"
     [mdePopoverCloseOnClick]="false" [mdePopoverEnterDelay]="searchExtendedPopupDelay" (closed)="extendedSearchClose()">
     <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="ngx-search-plus"
@@ -23,7 +23,7 @@
 
 <!--popover for search to provide extended options-->
 <mde-popover #searchPopover="mdePopover" [mdePopoverOverlapTrigger]="false" mdePopoverPositionY="below"
-  mdePopoverPositionX="before" [mdePopoverOffsetY]="0" [mdePopoverOffsetX]="-8" >
+  mdePopoverPositionX="before" [mdePopoverOffsetY]="0" [mdePopoverOffsetX]="-8">
   <div class="ngx-search-elementgroup ngx-search-semi-transparent ngx-columnlayout ngx-rowgap10px">
     <mat-card style="max-width: 2000px">
       <mat-card-content>
@@ -31,13 +31,13 @@
 
           <!--startsWith checkbox-->
           <mat-checkbox formControlName="startsWith"
-            matTooltip="{{'SEARCH_STARTS_WITH_TOOLTIP' | localizeTerms:searchTerms }}">
+            matTooltip="{{'SEARCH_STARTS_WITH_TOOLTIP' | localizeTerms:searchTerms }}" matTooltipPosition="below">
             <span class="ngx-search-element-text-10pt">{{'SEARCH_STARTS_WITH' | localizeTerms:searchTerms }}</span>
           </mat-checkbox>
 
           <!--case sensitive checkbox-->
           <mat-checkbox formControlName="caseSensitive"
-            matTooltip="{{'SEARCH_CASE_SENSITIVE_TOOLTIP' | localizeTerms:searchTerms }}">
+            matTooltip="{{'SEARCH_CASE_SENSITIVE_TOOLTIP' | localizeTerms:searchTerms }}" matTooltipPosition="below">
             <span class="ngx-search-element-text-10pt">{{'SEARCH_CASE_SENSITIVE' | localizeTerms:searchTerms}}</span>
           </mat-checkbox>
           <!--from-to-->
@@ -49,7 +49,8 @@
               <mat-label class="ngx-search-element-text-10pt">{{'SEARCH_FROM' | localizeTerms:searchTerms}}</mat-label>
               <input matInput type="text" formControlName="searchFrom" maxlength="100"
                 placeholder="{{'SEARCH_FROM' | localizeTerms:searchTerms }}" autofocus />
-              <mat-hint class="ngx-search-element-text-8pt" align="start">{{'SEARCH_RANGE_LOWER' | localizeTerms:searchTerms}}
+              <mat-hint class="ngx-search-element-text-8pt" align="start">{{'SEARCH_RANGE_LOWER' |
+                localizeTerms:searchTerms}}
               </mat-hint>
             </mat-form-field>
 
@@ -58,7 +59,8 @@
               <mat-label class="ngx-search-element-text-10pt">{{'SEARCH_TO' | localizeTerms:searchTerms }}</mat-label>
               <input matInput type="text" formControlName="searchTo" maxlength="100"
                 placeholder="{{'SEARCH_TO' | localizeTerms:searchTerms }}" />
-              <mat-hint class="ngx-search-element-text-8pt" align="start">{{'SEARCH_RANGE_UPPER' | localizeTerms:searchTerms}}
+              <mat-hint class="ngx-search-element-text-8pt" align="start">{{'SEARCH_RANGE_UPPER' |
+                localizeTerms:searchTerms}}
               </mat-hint>
             </mat-form-field>
           </fieldset>
