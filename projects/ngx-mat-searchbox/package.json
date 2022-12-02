@@ -34,12 +34,12 @@
     "mat select searchable"
   ],
   "peerDependencies": {
-    "@angular/animations": ">=10.0.0",
-    "@angular/cdk": ">=10.0.0",
-    "@angular/common": ">=10.0.0",
-    "@angular/core": ">=10.0.0",
-    "@angular/forms": ">=10.0.0",
-    "@angular/material": ">=10.0.0"
+    "@angular/animations": ">=13.0.0",
+    "@angular/cdk": ">=13.0.0",
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@angular/forms": ">=13.0.0",
+    "@angular/material": ">=13.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0",

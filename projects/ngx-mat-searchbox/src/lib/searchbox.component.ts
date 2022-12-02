@@ -8,6 +8,7 @@ import { ExtendedSearchChanges, SearchData, SearchParams, SearchResult, SearchRe
 import { enableControls } from './searchbox.utils';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SearchboxService } from './searchbox.service';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 /**
  * Searchbox component, sized to fit a toolbar, to which a set of search data is provided, and which can then
@@ -23,6 +24,10 @@ import { SearchboxService } from './searchbox.service';
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => NgxMatSearchboxComponent),
+    },
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: { disableTooltipInteractivity: true }
     }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
