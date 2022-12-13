@@ -14,7 +14,7 @@
 
   <!--button as trigger for extended search options popover-->
   <button #trigger mat-button [disableRipple]="true" class="ngx-search-extended-button ngx-search-inactive-button"
-    [mdePopoverTriggerFor]="searchPopover" mdePopoverTriggerOn="hover" popoverTrigger="mdePopoverTrigger"
+    [mdePopoverTriggerFor]="searchPopover" mdePopoverTriggerOn="hover"
     [mdePopoverCloseOnClick]="false" [mdePopoverEnterDelay]="searchExtendedPopupDelay" (closed)="extendedSearchClose()">
     <mat-icon *ngIf="searchExtended && !searchDisabled" svgIcon="ngx-search-plus"
       [ngClass]="{'ngx-search-icon-p75x':searchFieldSize==='small'}" [style.vertical-align]="'top'"></mat-icon>

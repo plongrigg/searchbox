@@ -43,6 +43,6 @@
   },
   "dependencies": {
     "tslib": "^2.0.0",
-    "@fgrid-ngx/mde": ">= 3.0.3"
+    "@fgrid-ngx/mde": ">= 3.0.9"
   }
 }
